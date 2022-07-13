@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 @Entity
 @Table(name = "academic")
-public class AcademicFormation {
+public class Academic {
     @Id
     @GeneratedValue(generator = "hibernate-uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
@@ -31,7 +31,7 @@ public class AcademicFormation {
     private Person person;
     @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Instant createdAt;
-    public AcademicFormation() {
+    public Academic() {
     }
 
     public UUID getId() {

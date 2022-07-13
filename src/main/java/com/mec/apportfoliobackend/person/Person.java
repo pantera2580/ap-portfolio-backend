@@ -1,6 +1,6 @@
 package com.mec.apportfoliobackend.person;
 
-import com.mec.apportfoliobackend.academic.AcademicFormation;
+import com.mec.apportfoliobackend.academic.Academic;
 import com.mec.apportfoliobackend.experience.Experience;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
@@ -29,9 +29,9 @@ public class Person {
     @OneToMany(mappedBy = "person", cascade = {CascadeType.MERGE})
     private Set<Experience> experiences;
     @OneToMany(mappedBy = "person", cascade = {CascadeType.MERGE})
-    private Set<AcademicFormation> academicFormations;
+    private Set<Academic> academicFormations;
     @OneToMany(mappedBy = "person", cascade = {CascadeType.MERGE})
-    private Set<AcademicFormation> skills;
+    private Set<Academic> skills;
     @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Instant createdAt;
     public Person() {
@@ -85,19 +85,19 @@ public class Person {
         this.experiences = experiences;
     }
 
-    public Set<AcademicFormation> getAcademicFormations() {
+    public Set<Academic> getAcademicFormations() {
         return academicFormations;
     }
 
-    public void setAcademicFormations(Set<AcademicFormation> academicFormations) {
+    public void setAcademicFormations(Set<Academic> academicFormations) {
         this.academicFormations = academicFormations;
     }
 
-    public Set<AcademicFormation> getSkills() {
+    public Set<Academic> getSkills() {
         return skills;
     }
 
-    public void setSkills(Set<AcademicFormation> skills) {
+    public void setSkills(Set<Academic> skills) {
         this.skills = skills;
     }
 

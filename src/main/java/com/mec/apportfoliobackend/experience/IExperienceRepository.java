@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 @Repository
-public interface IExperienceRepository extends JpaRepository<UUID, Experience> {
+public interface IExperienceRepository extends JpaRepository<Experience, UUID> {
 }
