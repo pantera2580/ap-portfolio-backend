@@ -1,0 +1,63 @@
+spring:
+  profiles:
+    active:
+      - dev
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: ${MYSQL_URL}
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database: mysql
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+name: dev-YAML
+environment: develop
+enabled: true
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    url: ${MYSQL_ADDON_URL}
+    username: ${MYSQL_ADDON_USER}
+    password: ${MYSQL_ADDON_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database: mysql
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+name: prod-YAML
+environment: production
+enabled: false
+---
+springdoc:
+  api-docs:
+    path: /api/docs
+  swagger-ui:
+    path:/api/docs/swagger-ui-custom.html
+logging:
+  level:
+    ROOT: WARN
+    com.mec.apportfoliobackend: DEBUG
