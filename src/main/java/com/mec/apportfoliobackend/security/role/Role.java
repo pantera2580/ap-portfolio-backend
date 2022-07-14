@@ -1,5 +1,7 @@
-package com.mec.apportfoliobackend.security;
+package com.mec.apportfoliobackend.security.role;
 
+import com.mec.apportfoliobackend.security.user.User;
+import com.mec.apportfoliobackend.security.util.RoleName;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
@@ -14,8 +16,9 @@ public class Role {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     @Type(type = "uuid-char")
     private UUID id;
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "name", nullable = false)
-    private String name;
+    private RoleName name;
     @Column(name = "description")
     private String description;
     @OneToMany(mappedBy = "role")
@@ -32,11 +35,11 @@ public class Role {
         this.id = id;
     }
 
-    public String getName() {
+    public RoleName getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(RoleName name) {
         this.name = name;
     }
 
