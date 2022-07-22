@@ -24,7 +24,7 @@ public class User {
     @JoinColumn(name = "user_id")
     private Role role;
     @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private Instant createdAt;
+    private Instant createdAt = Instant.now();
     public User() {
     }
 

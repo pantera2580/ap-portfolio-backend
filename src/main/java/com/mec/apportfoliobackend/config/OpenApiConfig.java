@@ -1,4 +1,4 @@
-/*package com.mec.apportfoliobackend.config;
+package com.mec.apportfoliobackend.config;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -24,4 +24,3 @@ public class OpenApiConfig {
                                 .bearerFormat("JWT")));
     }
 }
-*/
