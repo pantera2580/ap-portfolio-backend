@@ -1,5 +1,6 @@
-package com.mec.apportfoliobackend.security;
+package com.mec.apportfoliobackend.security.user;
 
+import com.mec.apportfoliobackend.security.role.Role;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
@@ -18,11 +19,12 @@ public class User {
     private String email;
     @Column(name = "password", nullable = false)
     private String password;
+    private String username;
     @ManyToOne()
     @JoinColumn(name = "user_id")
     private Role role;
     @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private Instant createdAt;
+    private Instant createdAt = Instant.now();
     public User() {
     }
 
@@ -40,6 +42,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
