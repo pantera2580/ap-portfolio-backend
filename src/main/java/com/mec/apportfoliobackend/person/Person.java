@@ -2,6 +2,7 @@ package com.mec.apportfoliobackend.person;
 
 import com.mec.apportfoliobackend.academic.Academic;
 import com.mec.apportfoliobackend.experience.Experience;
+import com.mec.apportfoliobackend.security.user.User;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
@@ -26,6 +27,9 @@ public class Person {
     private String phone;
     private String linkedinUrl;
     private String githubUrl;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
     @OneToMany(mappedBy = "person", cascade = {CascadeType.MERGE})
     private Set<Experience> experiences;
     @OneToMany(mappedBy = "person", cascade = {CascadeType.MERGE})
@@ -83,6 +87,14 @@ public class Person {
 
     public void setExperiences(Set<Experience> experiences) {
         this.experiences = experiences;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Set<Academic> getAcademicFormations() {
