@@ -1,5 +1,6 @@
 package com.mec.apportfoliobackend.security.user;
 
+import com.mec.apportfoliobackend.person.Person;
 import com.mec.apportfoliobackend.security.role.Role;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
@@ -20,6 +21,8 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
     private String username;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Person person;
     @ManyToOne()
     @JoinColumn(name = "user_id")
     private Role role;
@@ -58,6 +61,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     public Role getRole() {
