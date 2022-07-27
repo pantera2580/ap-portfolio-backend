@@ -15,7 +15,7 @@ public class Auth implements UserDetails {
     private List<GrantedAuthority> authorities;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return authorities;
     }
 
     public Auth() {
@@ -23,7 +23,7 @@ public class Auth implements UserDetails {
 
     public static Auth buildUser(User user){
         Auth auth = new Auth();
-        auth.setUsername(user.getEmail());
+        auth.setUsername(user.getUsername());
         auth.setPassword(user.getPassword());
         List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(user.getRole().getName().name()));
         auth.setAuthorities(authorities);

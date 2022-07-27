@@ -30,7 +30,7 @@ public class Academic {
     @JoinColumn(name = "person_id")
     private Person person;
     @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private Instant createdAt;
+    private Instant createdAt = Instant.now();
     public Academic() {
     }
 

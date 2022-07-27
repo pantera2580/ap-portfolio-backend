@@ -37,7 +37,7 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         if(!authService.existsByUsername(loginRequest.getUsername())) {
-            LOGGER.info("Username not found");
+            LOGGER.info("Username: %s not found".formatted(loginRequest.getUsername()));
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         LoginResponse loginResponse = authService.login(loginRequest);
