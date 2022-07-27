@@ -37,7 +37,7 @@ public class Person {
     @OneToMany(mappedBy = "person", cascade = {CascadeType.MERGE})
     private Set<Academic> skills;
     @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private Instant createdAt;
+    private Instant createdAt = Instant.now();
     public Person() {
     }
 
@@ -77,8 +77,8 @@ public class Person {
         return address;
     }
 
-    public void setAddress(String adress) {
-        this.address = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public Set<Experience> getExperiences() {

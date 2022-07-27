@@ -29,14 +29,12 @@ public class AuthService implements UserDetailsService, IUserService{
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> user = userRepository.findByUsername(username);
-        if(user.isEmpty()) throw new UsernameNotFoundException("Username not found");
+        if(user.isEmpty()) throw new UsernameNotFoundException("Username: %s not found".formatted(username));
         return Auth.buildUser(user.get());
     }
     @Override
     public User findByUsername(String username) {
-        Optional<User> user = userRepository.findByUsername(username);
-        if(user.isEmpty()) throw new UsernameNotFoundException("Username not found");
-        return user.get();
+        return userRepository.findByUsername(username).orElseThrow(()->new UsernameNotFoundException("Username: %s not found".formatted(username)));
     }
 
     @Override
@@ -53,8 +51,16 @@ public class AuthService implements UserDetailsService, IUserService{
     public LoginResponse login(LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
+        User user = this.findByUsername(loginRequest.getUsername());
         LoginResponse loginResponse = new LoginResponse();
-        loginResponse.setToken(jwtProvider.generateToken(authentication));
+        loginResponse.setId(user.getId());
+        loginResponse.setToken("Bearer " + jwtProvider.generateToken(authentication));
+        loginResponse.setUsername(authentication.getName());
+        if(user.getPerson() != null){
+            loginResponse.setIdPerson(user.getPerson().getId().toString());
+        }else {
+            loginResponse.setIdPerson("");
+        }
         return loginResponse;
     }
 }

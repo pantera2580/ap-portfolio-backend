@@ -1,6 +1,5 @@
 package com.mec.apportfoliobackend.security.user;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotEmpty;
 import java.util.UUID;
 
