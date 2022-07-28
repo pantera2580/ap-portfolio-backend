@@ -17,8 +17,12 @@ import javax.validation.Valid;
 @RequestMapping("/v1")
 public class PersonController {
     private final static Logger LOGGER = LoggerFactory.getLogger(PersonController.class);
-    @Autowired
-    private IPersonService personService;
+    private final IPersonService personService;
+
+    public PersonController(IPersonService personService) {
+        this.personService = personService;
+    }
+
     @Operation(summary = "Display person", description = "Display personal data from user", responses = {
             @ApiResponse(responseCode = "200", description = "Successful"),
             @ApiResponse(responseCode = "404", description = "Person not Found", content = @Content)

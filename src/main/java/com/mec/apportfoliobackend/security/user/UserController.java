@@ -21,8 +21,11 @@ import javax.validation.Valid;
 @RequestMapping("/v1/auth")
 public class UserController {
     private final static Logger LOGGER = LoggerFactory.getLogger(UserController.class);
-    @Autowired
-    private AuthService authService;
+    private final AuthService authService;
+
+    public UserController(AuthService authService) {
+        this.authService = authService;
+    }
 
     @Operation(summary = "Login", description = "Login a user in the api", responses = {
             @ApiResponse(responseCode = "200", description = "Successful login"),

@@ -1,6 +1,6 @@
 package com.mec.apportfoliobackend.person;
 
-import com.mec.apportfoliobackend.config.ModelMapper;
+import com.mec.apportfoliobackend.config.PersonMapper;
 import com.mec.apportfoliobackend.exception.PersonNotFoundException;
 import com.mec.apportfoliobackend.security.user.IUserRepository;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -21,17 +21,17 @@ public class PersonService implements IPersonService {
     @Override
     public PersonResponse save(PersonRequest personRequest, String id) {
         if(!userRepository.existsById(UUID.fromString(id))) throw new UsernameNotFoundException("Username not found");
-        Person person = ModelMapper.personRequestToEntity(personRequest, id);
+        Person person = PersonMapper.personRequestToEntity(personRequest, id);
         personRepository.save(person);
-        return ModelMapper.entityToPersonResponse(person);
+        return PersonMapper.entityToPersonResponse(person);
     }
 
     @Override
     public PersonResponse update(PersonRequest personRequest, String id) throws PersonNotFoundException {
         Person person = personRepository.findById(UUID.fromString(id)).orElseThrow(()-> new PersonNotFoundException("Person not found"));
-        ModelMapper.updatePersonalData(person, personRequest);
+        PersonMapper.updatePersonalData(person, personRequest);
         personRepository.save(person);
-        return ModelMapper.entityToPersonResponse(person);
+        return PersonMapper.entityToPersonResponse(person);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class PersonService implements IPersonService {
     @Override
     public PersonResponse findById(String id) throws PersonNotFoundException {
         Person person = personRepository.findById(UUID.fromString(id)).orElseThrow(()->new PersonNotFoundException("Person not found"));
-        return ModelMapper.entityToPersonResponse(person);
+        return PersonMapper.entityToPersonResponse(person);
     }
 
 }

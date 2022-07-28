@@ -25,7 +25,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) {
         String token = this.getToken(request);
         if(token!=null && jwtProvider.validateToken(token)) {
             String username = jwtProvider.getUserNameFromToken(token);
@@ -40,6 +40,9 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         } catch (IOException e) {
             logger.error("Fail in filter method");
             e.printStackTrace();
+        }
+        catch (ServletException exception){
+            logger.error(exception.getMessage());
         }
     }
 
