@@ -1,6 +1,6 @@
 package com.mec.apportfoliobackend.experience;
 
-import com.mec.apportfoliobackend.config.ModelMapper;
+import com.mec.apportfoliobackend.config.ExperienceMapper;
 import com.mec.apportfoliobackend.exception.ExperienceNotFoundException;
 import com.mec.apportfoliobackend.exception.PersonNotFoundException;
 import com.mec.apportfoliobackend.person.IPersonRepository;
@@ -24,24 +24,24 @@ public class ExperienceService implements IExperienceService{
         Person person = new Person();
         person.setId(UUID.fromString(personId));
         List<Experience> experienceList = experienceRepository.findByPerson(person).orElseThrow(()->new PersonNotFoundException("Person not found"));
-        return ModelMapper.experienceListToExperienceResponseList(experienceList);
+        return ExperienceMapper.experienceListToExperienceResponseList(experienceList);
     }
     @Override
     public ExperienceResponse save(ExperienceRequest experienceRequest, String personId) throws PersonNotFoundException {
         if(!personRepository.existsById(UUID.fromString(personId))) throw new PersonNotFoundException("Person not found");
         Person person = new Person();
         person.setId(UUID.fromString(personId));
-        Experience experience = ModelMapper.experienceRequestToExperience(experienceRequest);
+        Experience experience = ExperienceMapper.experienceRequestToExperience(experienceRequest);
         experience.setPerson(person);
         experienceRepository.save(experience);
-        return ModelMapper.experienceToExperienceResponse(experience);
+        return ExperienceMapper.experienceToExperienceResponse(experience);
     }
     @Override
     public ExperienceResponse update(ExperienceRequest experienceRequest, String experienceId) throws ExperienceNotFoundException {
         Experience experience = experienceRepository.findById(UUID.fromString(experienceId)).orElseThrow(()->new ExperienceNotFoundException("Experience not found"));
-        ModelMapper.updateExperienceData(experience, experienceRequest);
+        ExperienceMapper.updateExperienceData(experience, experienceRequest);
         experienceRepository.save(experience);
-        return ModelMapper.experienceToExperienceResponse(experience);
+        return ExperienceMapper.experienceToExperienceResponse(experience);
     }
     @Override
     public void delete(String experienceId) throws ExperienceNotFoundException {

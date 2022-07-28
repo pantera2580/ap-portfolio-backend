@@ -24,10 +24,16 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
+
+    private final AuthService authService;
+
+    private final JwtTokenFilter jwtTokenFilter;
     @Autowired
-    private AuthService authService;
-    @Autowired
-    private JwtTokenFilter jwtTokenFilter;
+    public SecurityConfig(AuthService authService, JwtTokenFilter jwtTokenFilter) {
+        this.authService = authService;
+        this.jwtTokenFilter = jwtTokenFilter;
+    }
+
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests(auth ->{
@@ -38,6 +44,7 @@ public class SecurityConfig {
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class)
                 .csrf().disable();
+        httpSecurity.cors();
         return httpSecurity.build();
     }
     @Bean

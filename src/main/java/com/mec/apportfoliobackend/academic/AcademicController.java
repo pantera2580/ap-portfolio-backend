@@ -19,9 +19,13 @@ import java.util.List;
 @Controller
 @RequestMapping("/v1/academic")
 public class AcademicController {
-    @Autowired
-    private IAcademicService academicService;
+    private final IAcademicService academicService;
     private final static Logger LOGGER = LoggerFactory.getLogger(AcademicController.class);
+
+    public AcademicController(IAcademicService academicService) {
+        this.academicService = academicService;
+    }
+
     @Operation(summary = "Display academic data", description = "Display personal academic data from person", responses = {
             @ApiResponse(responseCode = "200", description = "Successful"),
             @ApiResponse(responseCode = "404", description = "Person not Found", content = @Content)

@@ -1,6 +1,6 @@
 package com.mec.apportfoliobackend.academic;
 
-import com.mec.apportfoliobackend.config.ModelMapper;
+import com.mec.apportfoliobackend.config.AcademicMapper;
 import com.mec.apportfoliobackend.exception.AcademicNotFoundException;
 import com.mec.apportfoliobackend.exception.PersonNotFoundException;
 import com.mec.apportfoliobackend.person.IPersonRepository;
@@ -13,17 +13,25 @@ import java.util.UUID;
 
 @Service
 public class AcademicService implements IAcademicService{
-    @Autowired
     private IAcademicRepository academicRepository;
+    private final IPersonRepository personRepository;
+
+    public AcademicService(IPersonRepository personRepository) {
+        this.personRepository = personRepository;
+    }
+
     @Autowired
-    private IPersonRepository personRepository;
+    public AcademicService(IAcademicRepository academicRepository, IPersonRepository personRepository) {
+        this.academicRepository = academicRepository;
+        this.personRepository = personRepository;
+    }
 
     @Override
     public List<AcademicResponse> findAllByPersonId(String personId) throws PersonNotFoundException {
         Person person = new Person();
         person.setId(UUID.fromString(personId));
         List<Academic> academicList = academicRepository.findByPerson(person).orElseThrow(()->new PersonNotFoundException("Person not found"));
-        return ModelMapper.academicListToAcademicResponseList(academicList);
+        return AcademicMapper.academicListToAcademicResponseList(academicList);
     }
 
     @Override
@@ -31,18 +39,18 @@ public class AcademicService implements IAcademicService{
         if(!personRepository.existsById(UUID.fromString(personId))) throw new PersonNotFoundException("Person not found");
         Person person = new Person();
         person.setId(UUID.fromString(personId));
-        Academic academic = ModelMapper.academicRequestToAcademic(academicRequest);
+        Academic academic = AcademicMapper.academicRequestToAcademic(academicRequest);
         academic.setPerson(person);
         academicRepository.save(academic);
-        return ModelMapper.academicToAcademicResponse(academic);
+        return AcademicMapper.academicToAcademicResponse(academic);
     }
 
     @Override
     public AcademicResponse update(AcademicRequest academicRequest, String academicId) throws AcademicNotFoundException {
         Academic academic = academicRepository.findById(UUID.fromString(academicId)).orElseThrow(()->new AcademicNotFoundException("Academic not found"));
-        ModelMapper.updateAcademicData(academic, academicRequest);
+        AcademicMapper.updateAcademicData(academic, academicRequest);
         academicRepository.save(academic);
-        return ModelMapper.academicToAcademicResponse(academic);
+        return AcademicMapper.academicToAcademicResponse(academic);
     }
 
     @Override
