@@ -34,3 +34,6 @@ build/
 
 ### Enviorment Variables ###
 *.env
+
+### others ###
+request_examples

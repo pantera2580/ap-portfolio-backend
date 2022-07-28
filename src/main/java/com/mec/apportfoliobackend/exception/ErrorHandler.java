@@ -25,4 +25,11 @@ public class ErrorHandler {
                 request.getRequestURI());
         return new ResponseEntity<>(errorInfo, HttpStatus.BAD_REQUEST);
     }
+    @ExceptionHandler(value = AcademicNotFoundException.class)
+    public ResponseEntity<?> academicNotFoundException(HttpServletRequest request,
+                                                            AcademicNotFoundException exception) {
+        ErrorInfo errorInfo = new ErrorInfo(exception.getMessage(), HttpStatus.BAD_REQUEST.value(),
+                request.getRequestURI());
+        return new ResponseEntity<>(errorInfo, HttpStatus.BAD_REQUEST);
+    }
 }
