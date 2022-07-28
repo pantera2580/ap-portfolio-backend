@@ -1,45 +1,28 @@
 package com.mec.apportfoliobackend.experience;
 
-import com.mec.apportfoliobackend.person.Person;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
-import java.time.Instant;
 import java.time.LocalDate;
-import java.util.UUID;
-@Entity
-@Table(name = "experience")
-public class Experience {
-    @Id
-    @GeneratedValue(generator = "hibernate-uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    @Type(type = "uuid-char")
-    private UUID id;
-    @Column(name = "company", nullable = false)
+
+public class ExperienceResponse {
+    private String id;
     private String company;
-    @Column(name = "job", nullable = false)
     private String job;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate initialDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate finishDate;
     private String description;
-    @ManyToOne()
-    @JoinColumn(name = "person_id")
-    private Person person;
-    @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private Instant createdAt = Instant.now();
+    private String personId;
 
-    public Experience() {
+    public ExperienceResponse() {
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -83,19 +66,11 @@ public class Experience {
         this.description = description;
     }
 
-    public Person getPerson() {
-        return person;
+    public String getPersonId() {
+        return personId;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
-    }
-
-    public Instant getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Instant createdAt) {
-        this.createdAt = createdAt;
+    public void setPersonId(String personId) {
+        this.personId = personId;
     }
 }
