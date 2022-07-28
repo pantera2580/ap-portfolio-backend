@@ -32,7 +32,6 @@ public class PersonController {
             @ApiResponse(responseCode = "201", description = "Successful"),
             @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content),
             @ApiResponse(responseCode = "404", description = "User not Found", content = @Content)
-
     })
     @PostMapping(produces = {"application/json"}, value = "/{id}")
     public ResponseEntity<PersonResponse> savePerson(@Valid @RequestBody PersonRequest personRequest, @PathVariable String id) {
