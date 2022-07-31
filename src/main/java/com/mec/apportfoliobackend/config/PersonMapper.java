@@ -25,6 +25,8 @@ public class PersonMapper {
         personResponse.setName(person.getName());
         personResponse.setLastname(person.getLastname());
         personResponse.setAddress(person.getAddress());
+        personResponse.setDescription(person.getDescription());
+        personResponse.setTitle(person.getTitle());
         personResponse.setEmail(person.getEmail());
         personResponse.setPhone(person.getPhone());
         personResponse.setGithubUrl(person.getGithubUrl());
@@ -44,6 +46,8 @@ public class PersonMapper {
         person.setName(personRequest.getName());
         person.setLastname(personRequest.getLastname());
         person.setAddress(personRequest.getAddress());
+        person.setDescription(personRequest.getDescription());
+        person.setTitle(personRequest.getTitle());
         person.setEmail(personRequest.getEmail());
         person.setGithubUrl(personRequest.getGithubUrl());
         person.setLinkedinUrl(personRequest.getLinkedinUrl());

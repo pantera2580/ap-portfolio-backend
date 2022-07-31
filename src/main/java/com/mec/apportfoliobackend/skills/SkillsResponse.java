@@ -3,7 +3,7 @@ package com.mec.apportfoliobackend.skills;
 public class SkillsResponse {
     private String id;
     private String title;
-    private String description;
+    private Long percentage;
     private String personId;
 
     public SkillsResponse() {
@@ -25,12 +25,12 @@ public class SkillsResponse {
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
+    public Long getPercentage() {
+        return percentage;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setPercentage(Long percentage) {
+        this.percentage = percentage;
     }
 
     public String getPersonId() {

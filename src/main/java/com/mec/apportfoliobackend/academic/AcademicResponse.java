@@ -1,6 +1,6 @@
 package com.mec.apportfoliobackend.academic;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDate;
 
@@ -8,9 +8,9 @@ public class AcademicResponse {
     private String id;
     private String organization;
     private String title;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate initialDate;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate finishDate;
     private String description;
     private String personId;

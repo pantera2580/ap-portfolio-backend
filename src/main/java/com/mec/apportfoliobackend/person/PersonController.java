@@ -24,16 +24,16 @@ public class PersonController {
     }
 
     @Operation(summary = "Display person", description = "Display personal data from user", responses = {
-            @ApiResponse(responseCode = "200", description = "Successful"),
+            @ApiResponse(responseCode = "200", description = "Successful", content = @Content),
             @ApiResponse(responseCode = "404", description = "Person not Found", content = @Content)
     })
-    @GetMapping(produces = {"application/json"}, value = "/{id}")
+    @GetMapping(produces = {"application/json"}, value = "/public/{id}")
     public ResponseEntity<?> displayPerson(@PathVariable String id) throws PersonNotFoundException {
         if(!personService.existById(id)) throw new PersonNotFoundException("Person not found");
         return new ResponseEntity<>(personService.findById(id), HttpStatus.OK);
     }
     @Operation(summary = "Create person", description = "Create personal data from user", responses = {
-            @ApiResponse(responseCode = "201", description = "Successful"),
+            @ApiResponse(responseCode = "201", description = "Successful", content = @Content),
             @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content),
             @ApiResponse(responseCode = "404", description = "User not Found", content = @Content)
     })
@@ -42,7 +42,7 @@ public class PersonController {
         return new ResponseEntity<>(personService.save(personRequest, id), HttpStatus.CREATED);
     }
     @Operation(summary = "Update person", description = "Update personal data from user", responses = {
-            @ApiResponse(responseCode = "200", description = "Successful"),
+            @ApiResponse(responseCode = "200", description = "Successful", content = @Content),
             @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content),
             @ApiResponse(responseCode = "404", description = "Person not Found", content = @Content)
 
