@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/v1/experience")
 public class ExperienceController {
     private final IExperienceService experienceService;
     private final static Logger LOGGER = LoggerFactory.getLogger(ExperienceController.class);
-
+    @Autowired
     public ExperienceController(IExperienceService experienceService) {
         this.experienceService = experienceService;
     }

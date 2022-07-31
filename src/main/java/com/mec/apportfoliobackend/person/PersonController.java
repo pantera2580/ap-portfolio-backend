@@ -18,7 +18,7 @@ import javax.validation.Valid;
 public class PersonController {
     private final static Logger LOGGER = LoggerFactory.getLogger(PersonController.class);
     private final IPersonService personService;
-
+    @Autowired
     public PersonController(IPersonService personService) {
         this.personService = personService;
     }

@@ -22,7 +22,7 @@ public class SkillsMapper {
     public static SkillsResponse createSkillsResponse(Skills skills) {
         SkillsResponse skillsResponse = new SkillsResponse();
         skillsResponse.setId(skills.getId().toString());
-        skillsResponse.setDescription(skills.getDescription());
+        skillsResponse.setPercentage(skills.getPercentage());
         skillsResponse.setTitle(skills.getTitle());
         skillsResponse.setPersonId(skills.getPerson().getId().toString());
         return skillsResponse;
@@ -36,7 +36,7 @@ public class SkillsMapper {
 
     public static void updateSkillsData(Skills skills, SkillsRequest skillsRequest) {
         skills.setTitle(skillsRequest.getTitle());
-        skills.setDescription(skillsRequest.getDescription());
+        skills.setPercentage(skillsRequest.getPercentage());
     }
 
     public static SkillsResponse skillsToSkillsResponse(Skills skills) {
