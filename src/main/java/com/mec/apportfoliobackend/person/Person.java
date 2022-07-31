@@ -23,6 +23,8 @@ public class Person {
     private String name;
     private String profileImage;
     private String address;
+    private String description;
+    private String title;
     private String email;
     private String phone;
     private String linkedinUrl;
@@ -36,11 +38,12 @@ public class Person {
     private Set<Academic> academicFormations;
     @OneToMany(mappedBy = "person", cascade = {CascadeType.MERGE})
     private Set<Academic> skills;
+    @OneToMany(mappedBy = "person", cascade = {CascadeType.MERGE})
+    private Set<Academic> projects;
     @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Instant createdAt = Instant.now();
     public Person() {
     }
-
     public UUID getId() {
         return id;
     }
@@ -81,6 +84,22 @@ public class Person {
         this.address = address;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public Set<Experience> getExperiences() {
         return experiences;
     }
@@ -104,13 +123,20 @@ public class Person {
     public void setAcademicFormations(Set<Academic> academicFormations) {
         this.academicFormations = academicFormations;
     }
-
     public Set<Academic> getSkills() {
         return skills;
     }
 
     public void setSkills(Set<Academic> skills) {
         this.skills = skills;
+    }
+
+    public Set<Academic> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(Set<Academic> projects) {
+        this.projects = projects;
     }
 
     public String getEmail() {

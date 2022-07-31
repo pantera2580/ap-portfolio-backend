@@ -9,6 +9,8 @@ public class PersonRequest {
     private String name;
     private String profileImage;
     private String address;
+    private String description;
+    private String title;
     @NotBlank(message = "email is required")
     private String email;
     @NotBlank(message = "phone numbre is required")
@@ -49,6 +51,22 @@ public class PersonRequest {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getEmail() {

@@ -30,7 +30,7 @@ public class ExperienceController {
             @ApiResponse(responseCode = "200", description = "Successful"),
             @ApiResponse(responseCode = "404", description = "Person not Found", content = @Content)
     })
-    @GetMapping(value = "/{idPerson}", produces = {"application/json"})
+    @GetMapping(value = "/public/{idPerson}", produces = {"application/json"})
     public ResponseEntity<List<ExperienceResponse>> displayAcademic(@PathVariable String idPerson) throws PersonNotFoundException {
         return new ResponseEntity<>(experienceService.findAllByPersonId(idPerson), HttpStatus.OK);
     }

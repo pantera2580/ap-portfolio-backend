@@ -17,7 +17,7 @@ public class Skills {
     private UUID id;
     @Column(name = "title", nullable = false)
     private String title;
-    private String description;
+    private Long percentage;
     @ManyToOne()
     @JoinColumn(name = "person_id")
     private Person person;
@@ -43,12 +43,12 @@ public class Skills {
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
+    public Long getPercentage() {
+        return percentage;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setPercentage(Long percentage) {
+        this.percentage = percentage;
     }
 
     public Person getPerson() {
