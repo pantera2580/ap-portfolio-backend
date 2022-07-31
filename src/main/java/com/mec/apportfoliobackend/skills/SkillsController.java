@@ -20,7 +20,7 @@ import java.util.List;
 public class SkillsController {
     private final ISkillsService skillsService;
     private final static Logger LOGGER = LoggerFactory.getLogger(SkillsController.class);
-
+    @Autowired
     public SkillsController(ISkillsService skillsService) {
         this.skillsService = skillsService;
     }

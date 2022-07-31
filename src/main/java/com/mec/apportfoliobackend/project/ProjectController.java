@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-
+@RestController
+@RequestMapping("/v1/project")
 public class ProjectController {
     private final IProjectService projectService;
     private final static Logger LOGGER = LoggerFactory.getLogger(ProjectController.class);

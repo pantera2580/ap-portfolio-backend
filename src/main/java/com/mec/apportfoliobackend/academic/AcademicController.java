@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/v1/academic")
 public class AcademicController {
     private final IAcademicService academicService;
     private final static Logger LOGGER = LoggerFactory.getLogger(AcademicController.class);
-
+    @Autowired
     public AcademicController(IAcademicService academicService) {
         this.academicService = academicService;
     }
